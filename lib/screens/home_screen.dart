@@ -24,7 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
   List<dynamic> _friends = [];
   bool _isLoading = false;
 
-  // Кэшированные списки для оптимизации
   List<dynamic> _activeTasks = [];
   List<dynamic> _completedTasks = [];
 
@@ -49,7 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (_token != null && _userId != null) {
       try {
-        // Параллельная загрузка данных для ускорения
         final results = await Future.wait([
           ApiService.getProfile(_token!, _userId!),
           ApiService.getTasks(_token!),

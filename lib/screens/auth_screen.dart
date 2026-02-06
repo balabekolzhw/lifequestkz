@@ -21,7 +21,6 @@ class _AuthScreenState extends State<AuthScreen> {
   bool _isLoading = false;
   bool _showPassword = false;
 
-  // Validation helpers
   String? _validateEmail(String email) {
     if (email.isEmpty) return 'Email міндетті';
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
@@ -32,8 +31,10 @@ class _AuthScreenState extends State<AuthScreen> {
   String? _validatePassword(String password) {
     if (password.isEmpty) return 'Құпия сөз міндетті';
     if (password.length < 8) return 'Құпия сөз кемінде 8 таңба болуы керек';
-    if (!RegExp(r'[a-z]').hasMatch(password)) return 'Кемінде бір кіші әріп қажет';
-    if (!RegExp(r'[A-Z]').hasMatch(password)) return 'Кемінде бір бас әріп қажет';
+    if (!RegExp(r'[a-z]').hasMatch(password))
+      return 'Кемінде бір кіші әріп қажет';
+    if (!RegExp(r'[A-Z]').hasMatch(password))
+      return 'Кемінде бір бас әріп қажет';
     if (!RegExp(r'\d').hasMatch(password)) return 'Кемінде бір сан қажет';
     return null;
   }
@@ -53,14 +54,12 @@ class _AuthScreenState extends State<AuthScreen> {
     final password = _passwordController.text;
     final username = _usernameController.text.trim();
 
-    // Email validation
     final emailError = _validateEmail(email);
     if (emailError != null) {
       _showError(emailError);
       return false;
     }
 
-    // Password validation (full check only for registration)
     if (!isLogin) {
       final passwordError = _validatePassword(password);
       if (passwordError != null) {
@@ -382,7 +381,10 @@ class _AuthScreenState extends State<AuthScreen> {
           decoration: InputDecoration(
             hintText: 'Құпия сөз',
             hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-            prefixIcon: const Icon(Icons.lock_outline, color: Color(0xFF6C5CE7)),
+            prefixIcon: const Icon(
+              Icons.lock_outline,
+              color: Color(0xFF6C5CE7),
+            ),
             suffixIcon: IconButton(
               icon: Icon(
                 _showPassword ? Icons.visibility_off : Icons.visibility,
